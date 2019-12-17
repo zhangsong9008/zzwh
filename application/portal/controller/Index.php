@@ -1,5 +1,6 @@
 <?php
-namespace app\index\controller;
+
+namespace app\portal\controller;
 
 class Index
 {
@@ -11,5 +12,10 @@ class Index
     public function hello($name = 'ThinkPHP5')
     {
         return 'hello,' . $name;
+    }
+
+    public function test()
+    {
+        return 'test';
     }
 }
