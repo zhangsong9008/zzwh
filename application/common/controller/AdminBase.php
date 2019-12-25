@@ -3,12 +3,13 @@
 namespace app\common\controller;
 
 
-use app\admin\logic\SysLogLogic;
+use app\admin\traits\JsonResponse;
 use think\App;
 use think\Controller;
 
 class AdminBase extends Controller
 {
+    use JsonResponse;
     public $pageName = '';
 
     protected $logLogic = '';
@@ -41,8 +42,8 @@ class AdminBase extends Controller
 
         if (!$this->user) {
             if ($action != 'login') {
-                $this->redirect(url('admin/index/login'));
-                exit;
+               // $this->redirect(url('admin/index/login'));
+              //  exit;
             }
         }
     }

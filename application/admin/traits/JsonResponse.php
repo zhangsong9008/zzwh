@@ -6,7 +6,7 @@
  * Time: 9:51
  */
 
-namespace app\api\traits;
+namespace app\admin\traits;
 trait JsonResponse
 {
     /**
@@ -22,9 +22,6 @@ trait JsonResponse
             'msg' => $msg,
             'data' => $data
         ];
-        if($column){
-            $output['column'] = $column;
-        }
         echo json_encode($output, 256);
         exit;
     }
