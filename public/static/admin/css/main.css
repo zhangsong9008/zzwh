@@ -1,0 +1,28 @@
+.main {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.menu-sub .on {
+    background-color: #20a53a;
+    color: #fff;
+}
+
+.menu-sub span {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    background-color: #e6e6e6;
+    padding: 0 20px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.menu-sub span a {
+    text-decoration: none;
+    color: #0C0C0C;
+}
+
+.content {
+
+}
