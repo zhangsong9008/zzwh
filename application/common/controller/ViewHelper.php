@@ -20,10 +20,10 @@ class ViewHelper
         unset($data['limit']);
         unset($data['page']);
         unset($data['order']);
-        return [$data, $rows, $order,$page];
+        return [$data, $rows, $order, $page];
     }
 
-    public static function makePage($data,$total,$limit,$page)
+    public static function makePage($data, $total, $limit, $page)
     {
         return ['data' => $data, 'total' => $total, 'per_page' => $limit, 'current_page' => $page, 'last_page' => 1, 'code' => 1];
     }

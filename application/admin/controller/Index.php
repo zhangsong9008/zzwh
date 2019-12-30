@@ -34,11 +34,13 @@ class Index extends AdminBase
         return $this->fetch();
     }
 
-    public function logout(){
-        session('login_role',null);
+    public function logout()
+    {
+        session('login_role', null);
     }
 
-    public function upload(){
+    public function upload()
+    {
         return $this->fetch();
     }
 

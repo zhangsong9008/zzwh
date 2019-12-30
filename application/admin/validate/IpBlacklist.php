@@ -14,7 +14,7 @@ class IpBlacklist extends Validate
     protected $rule = [
         'start_ip|起始ip段' => 'require|ip',
         'end_ip|结束ip段' => 'require|ip|egt:start_ip',
-       // 'expire_date' => 'require|dateFormat:Y-m-d'
+        // 'expire_date' => 'require|dateFormat:Y-m-d'
     ];
 
     protected $message = [

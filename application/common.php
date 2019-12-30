@@ -139,5 +139,5 @@ function makePassword($pwd, $salt = '')
 function is_local()
 {
     $host = \think\facade\Request::server('HTTP_HOST');
-    return (false !== stripos($host, 'local') || gethostbyname($host)=='10.109.24.63');
+    return (false !== stripos($host, 'local') || gethostbyname($host) == '10.109.24.63');
 }

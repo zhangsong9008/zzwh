@@ -17,14 +17,14 @@
 <p>Shows you how to use the core plupload API.</p>
 
 <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
-<br />
+<br/>
 
 <div id="container">
     <a id="pickfiles" href="javascript:;">[Select files]</a>
     <a id="uploadfiles" href="javascript:;">[Upload files]</a>
 </div>
 
-<br />
+<br/>
 <pre id="console"></pre>
 
 
@@ -32,41 +32,41 @@
     // Custom example logic
 
     var uploader = new plupload.Uploader({
-        runtimes : 'html5,flash,silverlight,html4',
-        browse_button : 'pickfiles', // you can pass an id...
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'pickfiles', // you can pass an id...
         container: document.getElementById('container'), // ... or DOM Element itself
-        url : '{:url("admin/file/upload")}',
-        flash_swf_url : '/static/admin/js/Moxie.swf',
-        silverlight_xap_url : '/static/admin/js/Moxie.xap',
+        url: '{:url("admin/file/upload")}',
+        flash_swf_url: '/static/admin/js/Moxie.swf',
+        silverlight_xap_url: '/static/admin/js/Moxie.xap',
 
-        filters : {
-            max_file_size : '50mb',
+        filters: {
+            max_file_size: '50mb',
             mime_types: [
-                {title : "excel文件", extensions : "xls,xlsx"},
+                {title: "excel文件", extensions: "xls,xlsx"},
             ]
         },
 
         init: {
-            PostInit: function() {
+            PostInit: function () {
                 document.getElementById('filelist').innerHTML = '';
 
-                document.getElementById('uploadfiles').onclick = function() {
+                document.getElementById('uploadfiles').onclick = function () {
                     uploader.start();
                     return false;
                 };
             },
 
-            FilesAdded: function(up, files) {
-                plupload.each(files, function(file) {
+            FilesAdded: function (up, files) {
+                plupload.each(files, function (file) {
                     document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                 });
             },
 
-            UploadProgress: function(up, file) {
+            UploadProgress: function (up, file) {
                 document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
             },
 
-            Error: function(up, err) {
+            Error: function (up, err) {
                 document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
             }
         }

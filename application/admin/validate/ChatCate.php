@@ -24,7 +24,7 @@ class ChatCate extends Validate
 
     protected $scene = [
         'add' => ['name'],
-        'update' => ['name','id'],
+        'update' => ['name', 'id'],
         'delete' => ['id']
     ];
 }

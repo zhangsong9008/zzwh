@@ -16,7 +16,7 @@ class Ad extends Validate
         'description|广告文案' => 'require',
         'img|广告素材' => 'require',
         'link|连接地址' => 'require',
-        'id|id'=>'require'
+        'id|id' => 'require'
     ];
 
     protected $message = [
@@ -29,8 +29,8 @@ class Ad extends Validate
     ];
 
     protected $scene = [
-        'add' => ['name','description','img','link'],
-        'update' =>  ['name','description','img','id','link'],
-        'delete'=>['id']
+        'add' => ['name', 'description', 'img', 'link'],
+        'update' => ['name', 'description', 'img', 'id', 'link'],
+        'delete' => ['id']
     ];
 }

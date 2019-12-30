@@ -54,8 +54,6 @@ class CheckToken extends Controller
         }
 
 
-
-
         // throw new ApiException(ApiErrDesc::ERROR_JWT_TOKEN_EXPIRED);
         // dump2(Request::header());
 
@@ -101,14 +99,13 @@ class CheckToken extends Controller
 
         }
 
-        if($uid){
+        if ($uid) {
             $redis = Cache::store('redis')->handler();
-            $force = $redis->get('force_offline_'.$uid);
-            if($force){
+            $force = $redis->get('force_offline_' . $uid);
+            if ($force) {
                 throw new ApiException([11, '您的账号被强制下线了']);
             }
         }
-
 
 
         //is_local() && $uid = 4;

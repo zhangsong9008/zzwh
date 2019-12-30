@@ -17,7 +17,7 @@ class Flow extends Validate
         'cate_id|分类' => 'require',
         'priority_level|优先级' => 'in:1,2,3,4',
         'id|工单id' => 'require',
-        'deadline'=>'require'
+        'deadline' => 'require'
     ];
 
     protected $message = [
@@ -26,11 +26,11 @@ class Flow extends Validate
         'cate_id.require' => '工单分类不能为空',
         'priority_level.in' => '优先级值不正确',
         'id.require' => '工单id不能为空',
-        'deadline.require'=>"截至时间不能为空"
+        'deadline.require' => "截至时间不能为空"
     ];
 
     protected $scene = [
-        'create' => ['name', 'description', 'cate_id', 'priority_level','deadline'],
+        'create' => ['name', 'description', 'cate_id', 'priority_level', 'deadline'],
         'ignore' => ['id'],
         'transfer' => ['id'],
         'finish' => ['id'],

@@ -29,7 +29,7 @@ class ApiBase extends Controller
     {
         parent::__construct($app);
         $this->page = input('page', 1, 'intval');
-        $this->limit = min(input('limit', 20, 'intval'),100);
+        $this->limit = min(input('limit', 20, 'intval'), 100);
         $this->order = input('order', '');
 
         $input = $this->request->param();
@@ -58,20 +58,20 @@ class ApiBase extends Controller
                 $map[$type][] = $name;
             }*/
 
-            list($map, $rows, $order,$page) = ViewHelper::makeSearch();
+            list($map, $rows, $order, $page) = ViewHelper::makeSearch();
             //dump2(input());
             $logic = app((string)'app\\' . request()->module() . '\logic\\' . request()->controller() . 'Logic');
 
             $param = $this->extMap;
-            if($param){
+            if ($param) {
                 $map = $param;
             }
 
 
-            $list = $logic->getList($map, $rows, $order,$page);
+            $list = $logic->getList($map, $rows, $order, $page);
 
             //$controller = app((string)'app\\' . request()->module() . '\controller\\' . request()->controller());
-            if(method_exists($this,'_format')){
+            if (method_exists($this, '_format')) {
                 $list = $this->_format($list);
             }
 
@@ -110,14 +110,14 @@ class ApiBase extends Controller
                     $msg = '添加失败';
                 }
             }
-            if(method_exists($this,'_after_add')){
+            if (method_exists($this, '_after_add')) {
                 $data['id'] = $id;
                 $this->_after_add($data);
             }
         } catch (\Exception $e) {
             $this->jsonData(1005, $e->getMessage(), ['file' => $e->getFile(), 'line' => $e->getLine()]);
         }
-        $this->jsonData($res ? 0 : 1005, $msg,['id'=>$id]);
+        $this->jsonData($res ? 0 : 1005, $msg, ['id' => $id]);
     }
 
     //修改数据
@@ -142,7 +142,7 @@ class ApiBase extends Controller
                 }
             }
 
-            if(method_exists($this,'_after_update')){
+            if (method_exists($this, '_after_update')) {
                 $this->_after_update($data);
             }
 
@@ -181,7 +181,7 @@ class ApiBase extends Controller
                 }
             }
 
-            if(method_exists($this,'_after_delete')){
+            if (method_exists($this, '_after_delete')) {
                 $this->_after_delete($data);
             }
 

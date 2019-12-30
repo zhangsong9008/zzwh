@@ -25,6 +25,6 @@ class Client extends Validate
     ];
 
     protected $scene = [
-        'add' => ['name','sex','phone'],
+        'add' => ['name', 'sex', 'phone'],
     ];
 }

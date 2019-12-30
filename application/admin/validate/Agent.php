@@ -29,8 +29,8 @@ class Agent extends Validate
     ];
 
     protected $scene = [
-        'add' => ['name','mail','phone'],
-        'update' => ['name', 'mail','phone','id'],
+        'add' => ['name', 'mail', 'phone'],
+        'update' => ['name', 'mail', 'phone', 'id'],
         'delete' => ['id'],
     ];
 }

@@ -42,13 +42,36 @@ class AdminBase extends Controller
 
         if (!$this->user) {
             if ($action != 'login') {
-               // $this->redirect(url('admin/index/login'));
-              //  exit;
+                // $this->redirect(url('admin/index/login'));
+                //  exit;
             }
         }
     }
 
     //获取页面列表
+
+    /**
+     * 为img，css，js添加版本号
+     * @param $content
+     * @return string|string[]|null
+     */
+    private function fetchVersion($content)
+    {
+        if (empty($content)) {
+            return $content;
+        }
+        $version = config('template.version');
+        $content = preg_replace('/<script(.*?)src="(.*?)\.(js)"(.*?)><\/script>/i',
+            '<script$1src="$2.$3?v=' . $version . '"$4></script>', $content);
+        $content = preg_replace('/<img(.*?)src="(.*?)\.(jpg|gif|png|jpeg)"(.*?)>/i',
+            '<img$1src="$2.$3?v=' . $version . '"$4>', $content);
+        $content = preg_replace('/<link(.*?)href="(.*?)\.(css)"(.*?)>/i', '<link$1href="$2.$3?v=' . $version . '"$4>',
+            $content);
+        return $content;
+    }
+
+    //新增数据
+
     public function index()
     {
         if ($this->request->isAjax()) {
@@ -76,7 +99,8 @@ class AdminBase extends Controller
         return $this->fetch($this->viewPage);
     }
 
-    //新增数据
+    //修改数据
+
     public function add()
     {
         if ($this->request->isAjax()) {
@@ -120,7 +144,19 @@ class AdminBase extends Controller
         return $this->fetch($this->viewPage);
     }
 
-    //修改数据
+    //删除数据
+
+    protected function returnMsg($res, $msg = '', $url = '')
+    {
+        if ($res) {
+            $this->success($msg ?: '操作成功', $url);
+        } else {
+            $this->error($msg ?: '操作失败', $url);
+        }
+    }
+
+    //修改状态
+
     public function update()
     {
         if ($this->request->isAjax()) {
@@ -172,7 +208,6 @@ class AdminBase extends Controller
         return $this->fetch($this->viewPage);
     }
 
-    //删除数据
     public function delete()
     {
         $res = false;
@@ -206,7 +241,6 @@ class AdminBase extends Controller
         $this->returnMsg($res, $msg);
     }
 
-    //修改状态
     public function switchStatus()
     {
         $res = false;
@@ -220,35 +254,6 @@ class AdminBase extends Controller
             $this->_before_delete();
         }
         $this->returnMsg($res, $logic->getMsg());
-    }
-
-    /**
-     * 为img，css，js添加版本号
-     * @param $content
-     * @return string|string[]|null
-     */
-    private function fetchVersion($content)
-    {
-        if (empty($content)) {
-            return $content;
-        }
-        $version = config('template.version');
-        $content = preg_replace('/<script(.*?)src="(.*?)\.(js)"(.*?)><\/script>/i',
-            '<script$1src="$2.$3?v=' . $version . '"$4></script>', $content);
-        $content = preg_replace('/<img(.*?)src="(.*?)\.(jpg|gif|png|jpeg)"(.*?)>/i',
-            '<img$1src="$2.$3?v=' . $version . '"$4>', $content);
-        $content = preg_replace('/<link(.*?)href="(.*?)\.(css)"(.*?)>/i', '<link$1href="$2.$3?v=' . $version . '"$4>',
-            $content);
-        return $content;
-    }
-
-    protected function returnMsg($res, $msg = '', $url = '')
-    {
-        if ($res) {
-            $this->success($msg ?: '操作成功', $url);
-        } else {
-            $this->error($msg ?: '操作失败', $url);
-        }
     }
 
     public function _empty()

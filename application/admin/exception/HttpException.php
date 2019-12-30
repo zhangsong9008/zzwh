@@ -27,7 +27,7 @@ class HttpException extends Handle
             if (!$code || $code < 0) {
                 $code = ApiCodeMsg::UNKNOWN_ERROR[0];
             }
-            $message = $e->getMessage().'代码行号：'.$e->getLine() ?: ApiCodeMsg::UNKNOWN_ERROR[1];
+            $message = $e->getMessage() . '代码行号：' . $e->getLine() ?: ApiCodeMsg::UNKNOWN_ERROR[1];
         }
         $this->jsonData($code, $message, []);
     }

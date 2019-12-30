@@ -127,7 +127,10 @@ class Plupload
         }
 
 // Return Success JSON-RPC response
-        die('{"jsonrpc" : "2.0", "result" : null, "id" : "id" , "file":"'.$filePath.'"}');
+
+        $filePath = str_replace("\\","/",$filePath);
+
+        die('{"jsonrpc" : "2.0", "result" : "success", "id" : "id" , "file":"'.$filePath.'"}');
     }
 
 

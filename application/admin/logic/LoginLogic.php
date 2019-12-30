@@ -9,8 +9,6 @@ namespace app\admin\logic;
 
 
 use app\common\logic\BaseLogic;
-use app\common\model\Admins as AdminModel;
-use app\common\model\RoleUser;
 use think\captcha\Captcha;
 
 class LoginLogic extends BaseLogic
