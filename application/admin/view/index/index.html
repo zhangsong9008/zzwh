@@ -47,6 +47,11 @@
         margin-left: 10px;
     }
 
+    .import-error {
+        text-align: center;
+        margin-top: 30px;
+    }
+
 </style>
 <body>
 
@@ -95,6 +100,7 @@
                 </tr>
             </table>
         </div>
+        <div class="import-error"></div>
     </div>
 </div>
 <script type="text/javascript" src="/static/admin/js/plupload.full.min.js"></script>
@@ -130,7 +136,7 @@
 
             var response = JSON.parse(data.response);
 //('#' + self + '_v').val(response.file);
-            $('#' + self).html('文件上传成功正在导入数据请稍后')
+            $('#' + self).html('导入中请稍后')
             var type = $('#' + self).data('type')
             var params = {
                 file: response.file,
@@ -149,8 +155,10 @@
             dataType: 'json',
             success: function (res) {
                 //console.log(res)
-                if (res.code === 0) {
+                if (res.data.status === 1) {
                     $('#' + params.id).html('导入成功');
+                } else {
+                    $('.import-error').html(res.data.data)
                 }
             }
         });

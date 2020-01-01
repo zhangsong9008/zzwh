@@ -11,7 +11,7 @@ class Excel
     /*
  * 读取上传文件
 */
-    public function readUploadFile($filePath, $format, $num = 5000, $checkformat)
+    public function readUploadFile($filePath, $format, $num = 5000, $checkformat = [])
     {
         $return = array('status' => 0, 'data' => '');
         //检测文件有效性
@@ -61,13 +61,13 @@ class Excel
         for ($row = 2; $row <= $num; $row++) {
             $rows = array();
             foreach ($format as $k => $v) {
-                if (is_object($cell)) $cell = $cell->__toString();
+
                 if (empty($currentSheet->getCell('A' . $row)->getValue())) {
                     break 2;
                 }
                 $value = $currentSheet->getCell($k . $row)->getValue();
                 if (is_object($value)) $value = $value->__toString();
-                $rows[$k] = $value;
+                $rows[$v] = $value;
             }
 
             $excelData [$row] = $rows;
