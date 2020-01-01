@@ -13,7 +13,7 @@ class Plupload
      * 执行文件上传
      * @param array $allowExt
      */
-    public function upload($allowExt=[])
+    public function upload($allowExt = [])
     {
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -29,6 +29,7 @@ class Plupload
             exit; // finish preflight CORS requests here
         }
         */
+        $type = input('type');
 
 // 5 minutes execution time
         @set_time_limit(5 * 60);
@@ -58,7 +59,7 @@ class Plupload
         }
 
         $ext = $this->getExt($fileName);
-        if($allowExt && !in_array($ext,$allowExt)){
+        if ($allowExt && !in_array($ext, $allowExt)) {
             die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "上传的文件类型不被允许"}, "id" : "id"}');
         }
 
@@ -128,9 +129,9 @@ class Plupload
 
 // Return Success JSON-RPC response
 
-        $filePath = str_replace("\\","/",$filePath);
+        $filePath = str_replace("\\", "/", $filePath);
 
-        die('{"jsonrpc" : "2.0", "result" : "success", "id" : "id" , "file":"'.$filePath.'"}');
+        die('{"jsonrpc" : "2.0", "result" : "success", "id" : "id" , "file":"' . $filePath . '"}');
     }
 
 

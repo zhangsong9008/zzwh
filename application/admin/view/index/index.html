@@ -6,104 +6,157 @@
     <link href="__STATIC__/admin/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <style>
-    *{margin: 0;padding: 0;}
-    .main{width: 980px;margin:0 auto;font-size: 16px;padding: 20px;}
-    .main h1{text-align: center;}
-    .content{margin-top: 50px;}
-    .table td a{text-decoration: none;color: #00a0e9;}
-    .table td{padding: 10px;text-align: center}
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .main {
+        width: 980px;
+        margin: 0 auto;
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .main h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        margin-top: 20px;
+    }
+
+    .table td a {
+        text-decoration: none;
+        color: #00a0e9;
+    }
+
+    .table td {
+        padding: 10px;
+        text-align: center
+    }
+
+    .welcome {
+        text-align: center;
+    }
+
+    .welcome a {
+        text-decoration: none;
+        color: #00a0e9;
+        margin-left: 10px;
+    }
 
 </style>
 <body>
 
 <div class="main">
-    <h1>株洲市数据管理平台</h1>
+    <h1>株洲市文化数据管理平台</h1>
+    <div class="welcome"><span>欢迎您，管理员</span><a href="{:url('logout')}">退出登录</a></div>
     <div class="content">
         <div class="table">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <th width="200"></th>
-                    <th width="200"></th>
-                    <th width="200"></th>
-                    <th width="200"></th>
+                    <th width="33%"></th>
+                    <th width="33%"></th>
+                    <th width="33%"></th>
                 </tr>
                 <tr>
                     <td>报警汇总</td>
                     <td><a href="{:url('file/down',['name'=>'alarm_summary.xlsx'])}" class="down_load">下载模板</a></td>
-                    <td><a href="#" id="J_1" class="upload">上传</a></td>
-                    <td><a href="javascript:;" data-id="1" class="import">开始导入</a></td>
+                    <td><a href="#" data-type="alarm_summary" id="J_1" class="upload">上传并导入</a></td>
                 </tr>
 
                 <tr>
                     <td>场所类型</td>
                     <td><a href="{:url('file/down',['name'=>'place_type.xlsx'])}" class="down_load">下载模板</a></td>
-                    <td><a href="#" id="J_2" class="upload">上传</a></td>
-                    <td><a href="javascript:;" data-id="2" class="import">开始导入</a></td>
+                    <td><a href="#" data-type="place_type" id="J_2" class="upload">上传并导入</a></td>
                 </tr>
 
 
                 <tr>
                     <td>经营场所按月汇总</td>
                     <td><a href="{:url('file/down',['name'=>'place_month.xlsx'])}" class="down_load">下载模板</a></td>
-                    <td><a href="#" id="J_3" class="upload">上传</a></td>
-                    <td><a href="javascript:;" data-id="3" class="import">开始导入</a></td>
+                    <td><a href="#" data-type="place_month" id="J_3" class="upload">上传并导入</a></td>
                 </tr>
 
 
                 <tr>
                     <td>内容监管报警</td>
                     <td><a href="{:url('file/down',['name'=>'content_alarm.xlsx'])}" class="down_load">下载模板</a></td>
-                    <td><a href="#" id="J_4" class="upload">上传</a></td>
-                    <td><a href="javascript:;" data-id="4" class="import">开始导入</a></td>
+                    <td><a href="#" data-type="content_alarm" id="J_4" class="upload">上传并导入</a></td>
                 </tr>
 
 
                 <tr>
                     <td>违禁曲目报警</td>
                     <td><a href="{:url('file/down',['name'=>'alarm_music.xlsx'])}" class="down_load">下载模板</a></td>
-                    <td><a href="#" id="J_5" class="upload">上传</a></td>
-                    <td><a href="javascript:;" data-id="5" class="import">开始导入</a></td>
+                    <td><a href="#" data-type="alarm_music" id="J_5" class="upload">上传并导入</a></td>
                 </tr>
-
-
             </table>
         </div>
-
-        <input type="hidden" id="J_1_v">
-        <input type="hidden" id="J_2_v">
-        <input type="hidden" id="J_3_v">
-        <input type="hidden" id="J_4_v">
-        <input type="hidden" id="J_5_v">
-
     </div>
 </div>
 <script type="text/javascript" src="/static/admin/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
 <script>
     //触发的id
-    var ids = new Array("J_1","J_2","J_3","J_4","J_5");
+    var ids = new Array("J_1", "J_2", "J_3", "J_4", "J_5");
     var _upload = '{:url("admin/file/upload")}';
 
-    $.each(ids,function(i,n){
+    $.each(ids, function (i, n) {
         var self = this.toString();
+
         //实例化一个plupload上传对象
         var uploader = new plupload.Uploader({
-            browse_button : self, //触发文件选择对话框的按钮，为那个元素id
-            url : _upload ,//服务器端的上传页面地址
+            browse_button: self, //触发文件选择对话框的按钮，为那个元素id
+            url: _upload,//服务器端的上传页面地址
             max_file_size: '2mb',//限制为2MB
-            filters: [{title: "表格数据",extensions: "xlsx"}]//图片限制
+            filters: [{title: "表格数据", extensions: "xlsx"}]//图片限制
         });
+
+        //uploader.setOption('multipart_params', {type: $('#' + self).data('type')})
+
         //在实例对象上调用init()方法进行初始化
         uploader.init();
         //绑定各种事件，并在事件监听函数中做你想做的事
-        uploader.bind('FilesAdded',function(uploader,files){
+        uploader.bind('FilesAdded', function (uploader, files) {
             uploader.start();
         });
-        uploader.bind('FileUploaded',function(uploader,files,data){
+        uploader.bind('FileUploaded', function (uploader, files, data) {
+
+            //console.log(uploader, files, data, self)
+            //alert(uploader.browse_button)
+
             var response = JSON.parse(data.response);
-            $('#'+self+'_v').val(response.file);
+//('#' + self + '_v').val(response.file);
+            $('#' + self).html('文件上传成功正在导入数据请稍后')
+            var type = $('#' + self).data('type')
+            var params = {
+                file: response.file,
+                type: type,
+                id: self
+            };
+            importFile(params)
         });
     });
+
+    function importFile(params) {
+        $.ajax({
+            url: '{:url("import/execute")}',
+            method: 'POST',
+            data: params,
+            dataType: 'json',
+            success: function (res) {
+                //console.log(res)
+                if (res.code === 0) {
+                    $('#' + params.id).html('导入成功');
+                }
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>

@@ -42,8 +42,8 @@ class AdminBase extends Controller
 
         if (!$this->user) {
             if ($action != 'login') {
-                // $this->redirect(url('admin/index/login'));
-                //  exit;
+                 $this->redirect(url('admin/index/login'));
+                  exit;
             }
         }
     }

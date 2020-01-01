@@ -37,6 +37,7 @@ class Index extends AdminBase
     public function logout()
     {
         session('login_role', null);
+        return $this->redirect('login');
     }
 
     public function upload()

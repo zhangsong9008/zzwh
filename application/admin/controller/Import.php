@@ -14,4 +14,15 @@ use app\common\controller\AdminBase;
 class Import extends AdminBase
 {
 
+    public function execute()
+    {
+        $file = $this->request->param('file');
+        if (!$file) {
+            $this->jsonData(-1, '参数错误');
+        }
+        if (!file_exists($file)) {
+            $this->jsonData(-1, '文件不存在');
+        }
+        $this->jsonSuccess([]);
+    }
 }
